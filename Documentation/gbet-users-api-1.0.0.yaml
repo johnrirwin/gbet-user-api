@@ -1,0 +1,281 @@
+---
+openapi: 3.0.1
+info:
+  title: G-Bet User Api
+  description: This is an API for retrieving G-Bet Users data.
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/JIRWIN_1/g-bet-api/1.0.0
+  description: G-Bet User Api
+security:
+- application:
+  - read
+  - write
+paths:
+  /users:
+    get:
+      summary: Server example operation
+      description: This operation gets all users
+      responses:
+        "200":
+          description: A response containing one or more cities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      security:
+      - ApiKeyHeaderAuth: []
+    post:
+      summary: Server example operation
+      description: This operation gets all users
+      requestBody:
+        description: Optional description in *Markdown*
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: A response containing one or more cities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      security:
+      - ApiKeyHeaderAuth: []
+  /users/{userId}:
+    get:
+      summary: Get user by Id
+      description: This operation gets user by userId.
+      parameters:
+      - name: userId
+        in: path
+        description: The primary id for the specified user.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: jirwin
+      responses:
+        "200":
+          description: A response containing one or more cities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      security:
+      - ApiKeyHeaderAuth: []
+    delete:
+      summary: Delete user by Id
+      description: This operation deletes user by userId.
+      parameters:
+      - name: userId
+        in: path
+        description: The primary id for the specified user.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: jirwin
+      responses:
+        "200":
+          description: A response containing one or more cities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      security:
+      - ApiKeyHeaderAuth: []
+  /users/{userId}/subscribedUsers:
+    get:
+      summary: Get user by Id
+      description: This operation gets user by userId.
+      parameters:
+      - name: userId
+        in: path
+        description: The primary id for the specified user.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: jirwin
+      responses:
+        "200":
+          description: A response containing one or more cities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      security:
+      - ApiKeyHeaderAuth: []
+  /users/{userId}/subscribedUsers/{subscriberUserId}:
+    get:
+      summary: Get user by Id
+      description: This operation gets user by userId.
+      parameters:
+      - name: subscriberUserId
+        in: path
+        description: The primary id for the specified user.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: jirwin
+      - name: userId
+        in: path
+        description: The primary id for the specified user.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: jirwin
+      responses:
+        "200":
+          description: A response containing one or more cities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      security:
+      - ApiKeyHeaderAuth: []
+    delete:
+      summary: Delete user by Id
+      description: This operation deletes user by userId.
+      parameters:
+      - name: subscriberUserId
+        in: path
+        description: The primary id for the specified user.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: jirwin
+      - name: userId
+        in: path
+        description: The primary id for the specified user.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: jirwin
+      responses:
+        "200":
+          description: A response containing one or more cities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      security: []
+components:
+  schemas:
+    UserInfo:
+      required:
+      - $ref
+      - id
+      type: object
+      properties:
+        $ref:
+          type: string
+          nullable: true
+        id:
+          type: string
+          nullable: true
+      description: Base User Information Object. Including a '$ref' property which provides the link to the full object.
+    User:
+      required:
+      - email
+      - firstName
+      - lastName
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: "A geographic coordinate that specifies the east-west position of a point on the Earth's surface, or the surface of a celestial body."
+          nullable: false
+        lastName:
+          type: string
+          description: "A geographic coordinate that specifies the north-south position of a point on the Earth's surface, or the surface of a celestial body."
+          nullable: false
+        email:
+          type: string
+          description: "A geographic coordinate that specifies the north-south position of a point on the Earth's surface, or the surface of a celestial body."
+          nullable: false
+        phoneNumber:
+          type: string
+          description: "A geographic coordinate that specifies the north-south position of a point on the Earth's surface, or the surface of a celestial body."
+          nullable: true
+        userName:
+          type: string
+          description: "A geographic coordinate that specifies the north-south position of a point on the Earth's surface, or the surface of a celestial body."
+          nullable: true
+        userId:
+          type: string
+          description: "A geographic coordinate that specifies the north-south position of a point on the Earth's surface, or the surface of a celestial body."
+          nullable: true
+        subscribedUsers:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/UserInfo'
+      description: A representative point within the boundary.
+    UserCollection:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+      description: Collection of user objects.
+    inline_response_200:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/UserCollection'
+  responses:
+    UserResponse:
+      description: A response containing one or more cities.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_200'
+  parameters:
+    userId:
+      name: userId
+      in: path
+      description: The primary id for the specified user.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+      example: jirwin
+    subscriberUserId:
+      name: subscriberUserId
+      in: path
+      description: The primary id for the specified user.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+      example: jirwin
+  securitySchemes:
+    application:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: http://example.com/oauth/token
+          scopes:
+            write: allows modifying resources
+            read: allows reading resources
+    ApiKeyHeaderAuth:
+      type: apiKey
+      name: x-api-key
+      in: header
